@@ -28,38 +28,50 @@ void	init_player_checker_struct(t_all *all)
 	all->checker = check;
 }
 
-void	fill_direction_vector(t_direction *dir, char direction)
+void	fill_direction_vector(char direction, t_all *all)
 {
-	if (direction == 'W' || direction == 'E')
+	if (direction == 'W')
 	{
-		dir->dirY = 0;
-		if (direction == 'W')
-			dir->dirX = -1;
-		else
-			dir->dirX = 1;
+		all->player->dirX = -1;
+		all->player->dirY = 0;
+		all->plane->planeX = 0;
+		all->plane->planeY = 0.66;
 	}
-	else if (direction == 'S' || direction == 'N')
+	else if (direction == 'E')
 	{
-		dir->dirX = 0;
-		if (direction == 'S')
-			dir->dirY = -1;
-		else
-			dir->dirY = 1;
+		all->player->dirX = 1;
+		all->player->dirY = 0;
+		all->plane->planeX = 0;
+		all->plane->planeY = -0.66;
+	}
+	else if (direction == 'S')
+	{
+		all->player->dirX = 0;
+		all->player->dirY = 1;
+		all->plane->planeX = 0.66;
+		all->plane->planeY = 0;
+	}
+	else if (direction == 'N')
+	{
+		all->player->dirX = 0;
+		all->player->dirY = -1;
+		all->plane->planeX = -0.66;
+		all->plane->planeY = 0;
 	}
 }
 
 void	add_player_to_struct(t_all *all, int i, int j, char direction)
 {
 	t_player	*player;
-	t_direction	*dir;
+	t_plane		*plane;
 
 	player = malloc(sizeof(t_player));
-	dir = malloc(sizeof(t_direction));
-	player->x = j;
-	player->y = i;
-	fill_direction_vector(dir, direction);
-	player->dir = dir;
-	all->m->map[i][j] = 'P';
+	plane = malloc(sizeof(t_plane));
+	all->plane = plane;
+	player->posX = j + 0.5;
+	player->posY = i + 0.5;
+	all->m->map[i][j] = '0';
 	player->player_on_map = &all->m->map[i][j];
 	all->player = player;
+	fill_direction_vector(direction, all);
 }

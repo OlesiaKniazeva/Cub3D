@@ -37,6 +37,7 @@ void	check_map_correctness(t_all *all)
 	int			j;
 
 	i = -1;
+	print_double_array(all->m);
 	map = all->m->map;
 	while (map[i] && (++i < all->m->height))
 	{
@@ -80,8 +81,13 @@ void	parse_map(t_check *ch, t_all *all)
 	}
 	if (height != 1)
 	{
-		ft_lstadd_back(&lst, ft_lstnew(ch->line));
-		height++;
+		ch->trimmed = ft_strtrim(ch->line, " \t\n");
+		if (*(ch->trimmed))
+		{
+			ft_lstadd_back(&lst, ft_lstnew(ch->line));
+			height++;
+		}
+		free(ch->trimmed);
 	}
 	make_double_array_map(all, lst, height, width);
 	init_player_checker_struct(all);
@@ -145,5 +151,7 @@ void parse_data(char **argv, t_all *all)
 	skip_empty_lines(&ch);
 	parse_map(&ch, all);
 	all->data = data;
+	print_double_array(all->m);
+	printf("-------\n");
 	close(ch.fd);
 }

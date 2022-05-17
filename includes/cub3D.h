@@ -7,25 +7,37 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 
-# define X_SIZE 500
-# define Y_SIZE 500
+# define WIDTH 300
+# define HEIGHT 300
 
-# define ESC 65307
+# define X_SIZE 	500
+# define Y_SIZE 	500
 
-# define RED 0x00FF0000
-# define BLUE 0x000000FF
-# define WHITE 0xFFFFFFFF
+# define ESC 		65307
 
-# define DOWN 65364
-# define UP 65362
-# define LEFT 65361
-# define RIGHT 65363
+# define RED 		0x00FF0000
+# define BLUE		0x000000FF
+# define WHITE		0xFFFFFFFF
+# define BLACK		0x00000000
+# define CYAN		0x80A6FF
 
-# define W_UP 119
-# define S_DOWN 115
-# define A_LEFT 97
-# define D_RIGHT 100
+# define DOWN		65364
+# define UP			65362
+# define LEFT		65361
+# define RIGHT		65363
+
+# define W_UP		119
+# define S_DOWN 	115
+# define A_LEFT 	97
+# define D_RIGHT	100
+
+typedef struct s_time
+{
+	double time;
+	double old_time;
+}				t_time;
 
 typedef struct s_plane
 {
@@ -33,18 +45,18 @@ typedef struct s_plane
 	double	planeY;
 }				t_plane;
 
-typedef struct s_direction
-{
-	double	dirX;
-	double	dirY;
-}				t_direction;
+// typedef struct s_direction
+// {
+
+// }				t_direction;
 
 typedef struct s_player
 {
 	char			*player_on_map;
-	double			x;
-	double			y;
-	t_direction		*dir;
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
 }				t_player;
 
 typedef struct	s_ch_map
@@ -115,6 +127,9 @@ typedef struct	s_all
 	t_map		*m;
 	t_ch_map	*checker;
 	t_player	*player;
+	t_plane		*plane;
+	t_time		*time;
+	char		*line;
 }				t_all;
 
 
@@ -136,7 +151,9 @@ int		key_hook(int key_code, t_all *all);
 void	print_pixel_scale(int x_c, int y_c, int color, t_all *all);
 void	print_map(t_all *all);
 void	executing(t_all *all);
-
+void	print_raycaster(t_all *all);
+void	printVerticalLine(int x, int drawStart, int drawEnd, t_all *all);
+// void	init_data_for_execution(t_all *all);
 
 // free_memory.c //
 
@@ -168,6 +185,7 @@ void	add_color_of_floor_and_ceiling(char **args, t_check *ch, t_data *data);
 void	init_check_struct(t_check	*ch);
 void	init_player_checker_struct(t_all *all);
 void	add_player_to_struct(t_all *all, int i, int j, char direction);
+void	fill_direction_vector(char direction, t_all *all);
 
 
 // check_zeros_and_player.c //
