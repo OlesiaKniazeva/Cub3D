@@ -6,7 +6,7 @@ void	check_path_to_texture(char *str)
 	int fd;
 
 	len = ft_strlen(str);
-	if (ft_strncmp(".xmp", str + len - 4, 5))
+	if (ft_strncmp(".xpm", str + len - 4, 5))
 		error_exit("Wrong texture format", 8);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)

@@ -1,5 +1,10 @@
 #include "cub3D.h"
 
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
 void	my_mlx_pixel_put(t_win *win, int x, int y, int color)
 {
 	char	*dst;
@@ -149,10 +154,15 @@ int	key_hook(int key_code, t_all *all)
 		exit(0);
 	}
 	if (check_if_key_code_arrow(key_code))
+	{
 		change_map(all, key_code);
 	// print_double_array(all->m);
 	// print_map(all);
+	// mlx_destroy_image(all->win->mlx, all->win->img);
+	// all->win->img = mlx_new_image(all->win->mlx, all->m->width * 50, all->m->height * 50);
 	print_raycaster(all);
 	// printf("%d\n", key_code);
+	}
+
 	return 0;
 }

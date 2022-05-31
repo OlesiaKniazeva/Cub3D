@@ -151,7 +151,7 @@ void parse_data(char **argv, t_all *all)
 	skip_empty_lines(&ch);
 	parse_map(&ch, all);
 	all->data = data;
-	print_double_array(all->m);
-	printf("-------\n");
+	// print_double_array(all->m);
+	// printf("-------\n");
 	close(ch.fd);
 }
