@@ -1,7 +1,7 @@
-NO ./textures/n_wall.xmp
-SO ./textures/e_wall.xmp
-WE ./textures/s_wall.xmp
-EA ./textures/west_wall.xmp
+NO ./textures/blue_wall.xpm
+SO ./textures/green_wall.xpm
+WE ./textures/red_wall.xpm
+EA ./textures/yellow_wall.xpm
 
 F 220,100,0
 C 225,30,0

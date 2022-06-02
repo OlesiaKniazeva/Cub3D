@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	raycaster_start(t_all *all)
+void raycaster_start(t_all *all)
 {
 	int x = -1;
 
@@ -8,9 +8,9 @@ void	raycaster_start(t_all *all)
 	{
 		all->rc->cameraX = 2 * x / (double)WIDTH - 1;
 		all->rc->rayDirX = all->player->dirX +
-					all->plane->planeX * all->rc->cameraX;
+						   all->plane->planeX * all->rc->cameraX;
 		all->rc->rayDirY = all->player->dirY +
-					all->plane->planeY * all->rc->cameraX;
+						   all->plane->planeY * all->rc->cameraX;
 		all->rc->mapX = (int)(all->player->posX);
 		all->rc->mapY = (int)(all->player->posY);
 		if (all->rc->rayDirX == 0)
@@ -27,9 +27,9 @@ void	raycaster_start(t_all *all)
 	}
 }
 
-void	raycaster_second_part(t_all *all)
+void raycaster_second_part(t_all *all)
 {
-	t_raycast * rc = all->rc;
+	t_raycast *rc = all->rc;
 
 	rc->hit = 0;
 	if (rc->rayDirX < 0)
@@ -55,29 +55,29 @@ void	raycaster_second_part(t_all *all)
 	all->rc = rc;
 }
 
-void	dda_algorithm(t_all *all)
+void dda_algorithm(t_all *all)
 {
 	while (all->rc->hit == 0)
 	{
 		if (all->rc->sideDistX < all->rc->sideDistY)
-			{
-				all->rc->sideDistX += all->rc->deltaDistX;
-				all->rc->mapX += all->rc->stepX;
-				all->rc->side = 0;
-			}
-			else
-			{
-				all->rc->sideDistY += all->rc->deltaDistY;
-				all->rc->mapY += all->rc->stepY;
-				all->rc->side = 1;
-			}
-			if (all->m->map[all->rc->mapY][all->rc->mapX] == '1')
-				all->rc->hit = 1;
-			dda_algorithm_second_part(all);
+		{
+			all->rc->sideDistX += all->rc->deltaDistX;
+			all->rc->mapX += all->rc->stepX;
+			all->rc->side = 0;
+		}
+		else
+		{
+			all->rc->sideDistY += all->rc->deltaDistY;
+			all->rc->mapY += all->rc->stepY;
+			all->rc->side = 1;
+		}
+		if (all->m->map[all->rc->mapY][all->rc->mapX] == '1')
+			all->rc->hit = 1;
+		dda_algorithm_second_part(all);
 	}
 }
 
-void	dda_algorithm_second_part(t_all *all)
+void dda_algorithm_second_part(t_all *all)
 {
 	if (all->rc->side == 0)
 		all->rc->perpWallDist = all->rc->sideDistX - all->rc->deltaDistX;

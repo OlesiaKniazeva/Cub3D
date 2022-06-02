@@ -9,8 +9,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WIDTH 300
-# define HEIGHT 300
+# define WIDTH 900
+# define HEIGHT 700
 
 # define X_SIZE 	500
 # define Y_SIZE 	500
@@ -33,11 +33,7 @@
 # define A_LEFT 	97
 # define D_RIGHT	100
 
-typedef struct s_time
-{
-	double time;
-	double old_time;
-}				t_time;
+# define ON_KEYDOWN	2
 
 typedef struct s_plane
 {
@@ -45,10 +41,6 @@ typedef struct s_plane
 	double	planeY;
 }				t_plane;
 
-// typedef struct s_direction
-// {
-
-// }				t_direction;
 
 typedef struct s_player
 {
@@ -96,14 +88,14 @@ typedef struct	s_win
 	void	*img;
 	void	*win;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int		bpp;
+	int		l_len;
+	int		end;
 	int		x;
 	int		y;
 }				t_win;
 
-typedef struct	s_data
+typedef struct		s_data
 {
 	char	*s_texture;
 	char	*w_texture;
@@ -111,7 +103,35 @@ typedef struct	s_data
 	char	*n_texture;
 	int		ceiling[3];
 	int		floor[3];
-}				t_data;
+}					t_data;
+
+typedef struct s_raycast
+{
+	// int				x;
+	double			cameraX;
+	double			rayDirX;
+	double			rayDirY;
+	int				mapX;
+	int				mapY;
+	double			sideDistX;
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			perpWallDist;
+	int				stepX;
+	int				stepY;
+	int				hit;
+	int 			side;
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	double			wallX;
+	double			step;
+	double			texPos;
+	int				texX;
+	int				texY;
+	unsigned int	color;
+}				t_raycast;
 
 typedef struct	s_map
 {
@@ -128,8 +148,12 @@ typedef struct	s_all
 	t_ch_map	*checker;
 	t_player	*player;
 	t_plane		*plane;
-	t_time		*time;
 	char		*line;
+	t_raycast	*rc;
+	t_win		*s_tex;
+	t_win		*n_tex;
+	t_win		*w_tex;
+	t_win		*e_tex;
 }				t_all;
 
 
@@ -144,6 +168,10 @@ char	*ft_spaces_str(int width, int len);
 
 void	my_mlx_pixel_put(t_win *win, int x, int y, int color);
 int		key_hook(int key_code, t_all *all);
+int		create_rgb(int r, int g, int b);
+void	change_map(t_all *all, int key_code);
+int		check_if_key_code_arrow(int key_code);
+int		key_hook(int key_code, t_all *all);
 
 
 // executing.c //
@@ -152,8 +180,17 @@ void	print_pixel_scale(int x_c, int y_c, int color, t_all *all);
 void	print_map(t_all *all);
 void	executing(t_all *all);
 void	print_raycaster(t_all *all);
-void	printVerticalLine(int x, int drawStart, int drawEnd, t_all *all);
+void	printVerticalLine(int x, int drawStart, int drawEnd, t_all *all, int color);
+void	print_raycasted_map(int x, t_all *all);
 // void	init_data_for_execution(t_all *all);
+
+// raycast.c //
+
+void	raycaster_start(t_all *all);
+void	raycaster_second_part(t_all *all);
+void	dda_algorithm(t_all *all);
+void	dda_algorithm_second_part(t_all *all);
+
 
 // free_memory.c //
 
