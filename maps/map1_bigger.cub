@@ -1,6 +1,6 @@
-NO ./textures/cc.xpm
-SO ./textures/bb.xpm
-WE ./textures/yy.xpm
+NO ./textures/gravel.xpm
+SO ./textures/redpattern.xpm
+WE ./textures/hierba.xpm
 EA ./textures/yelltexpattern.xpm
 
 
