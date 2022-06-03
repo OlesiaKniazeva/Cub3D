@@ -12,9 +12,6 @@
 # define WIDTH 900
 # define HEIGHT 700
 
-# define X_SIZE 	500
-# define Y_SIZE 	500
-
 # define ESC 		65307
 
 # define RED 		0x00FF0000
@@ -49,6 +46,10 @@ typedef struct s_player
 	double			posY;
 	double			dirX;
 	double			dirY;
+	double			rotSpeed;
+	double			moveSpeed;
+	double			oldDirX;
+	double			oldPlaneX;
 }				t_player;
 
 typedef struct	s_ch_map
@@ -169,7 +170,7 @@ char	*ft_spaces_str(int width, int len);
 void	my_mlx_pixel_put(t_win *win, int x, int y, int color);
 int		key_hook(int key_code, t_all *all);
 int		create_rgb(int r, int g, int b);
-void	change_map(t_all *all, int key_code);
+void	change_map(t_all *all, int key_code, double moveSpeed);
 int		check_if_key_code_arrow(int key_code);
 int		key_hook(int key_code, t_all *all);
 
