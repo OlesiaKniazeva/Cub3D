@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:10:58 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 13:10:59 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_prow(char s, const char *symbols)
@@ -52,7 +64,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	{
 		s1++;
 		a++;
-	}	
+	}
 	while (ft_prow(*(pointer + cop - 1), set) == 1)
 		cop--;
 	pointer = ft_trimstring(s1, cop, a);

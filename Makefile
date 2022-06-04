@@ -11,11 +11,12 @@ LIB = $(LIB_DIR)/libft.a
 S_DIR =	srcs
 
 SRCS =	cub3D.c		$(S_DIR)/parse_data.c		$(S_DIR)/utilis.c\
-					$(S_DIR)/check_spaces.c		$(S_DIR)/check_texture.c\
+					$(S_DIR)/check_data.c		$(S_DIR)/check_texture.c\
 					$(S_DIR)/executing.c		$(S_DIR)/check_zeros_and_player.c\
 					$(S_DIR)/free_memory.c		$(S_DIR)/color_floor_and_ceiling_checker.c\
 					$(S_DIR)/init_structs.c		$(S_DIR)/minilibx_functions.c\
-					$(S_DIR)/raycast.c
+					$(S_DIR)/raycast.c			$(S_DIR)/init_structs_2.c\
+					$(S_DIR)/print_map.c		$(S_DIR)/work_with_textures.c
 
 OBJS = $(addprefix $(O_DIR)/,$(SRCS:.c=.o))
 

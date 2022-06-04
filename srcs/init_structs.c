@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_structs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:47:33 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 14:29:32 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	init_check_struct(t_check	*ch)
@@ -16,7 +28,7 @@ void	init_check_struct(t_check	*ch)
 
 void	init_player_checker_struct(t_all *all)
 {
-	t_ch_map *check;
+	t_ch_map	*check;
 
 	check = malloc(sizeof(t_ch_map));
 	check->amount = 0;
@@ -28,50 +40,16 @@ void	init_player_checker_struct(t_all *all)
 	all->checker = check;
 }
 
-void	fill_direction_vector(char direction, t_all *all)
+void	init_data_for_textures_and_speed(t_all *all)
 {
-	if (direction == 'W')
-	{
-		all->player->dirX = -1;
-		all->player->dirY = 0;
-		all->plane->planeX = 0;
-		all->plane->planeY = 0.66;
-	}
-	else if (direction == 'E')
-	{
-		all->player->dirX = 1;
-		all->player->dirY = 0;
-		all->plane->planeX = 0;
-		all->plane->planeY = -0.66;
-	}
-	else if (direction == 'S')
-	{
-		all->player->dirX = 0;
-		all->player->dirY = 1;
-		all->plane->planeX = 0.66;
-		all->plane->planeY = 0;
-	}
-	else if (direction == 'N')
-	{
-		all->player->dirX = 0;
-		all->player->dirY = -1;
-		all->plane->planeX = -0.66;
-		all->plane->planeY = 0;
-	}
-}
-
-void	add_player_to_struct(t_all *all, int i, int j, char direction)
-{
-	t_player	*player;
-	t_plane		*plane;
-
-	player = malloc(sizeof(t_player));
-	plane = malloc(sizeof(t_plane));
-	all->plane = plane;
-	player->posX = j + 0.5;
-	player->posY = i + 0.5;
-	all->m->map[i][j] = '0';
-	player->player_on_map = &all->m->map[i][j];
-	all->player = player;
-	fill_direction_vector(direction, all);
+	all->s_tex = malloc(sizeof(t_win));
+	all->w_tex = malloc(sizeof(t_win));
+	all->e_tex = malloc(sizeof(t_win));
+	all->n_tex = malloc(sizeof(t_win));
+	img_to_xpm_data_my(all->win, all->data->s_texture, all->s_tex);
+	img_to_xpm_data_my(all->win, all->data->n_texture, all->n_tex);
+	img_to_xpm_data_my(all->win, all->data->e_texture, all->e_tex);
+	img_to_xpm_data_my(all->win, all->data->w_texture, all->w_tex);
+	all->player->move_speed = MOVESPEED;
+	all->player->rot_speed = ROTSPEED;
 }

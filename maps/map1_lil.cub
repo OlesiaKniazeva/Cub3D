@@ -1,13 +1,13 @@
-NO ./textures/blue_wall.xpm
-SO ./textures/green_wall.xpm
-WE ./textures/red_wall.xpm
-EA ./textures/yellow_wall.xpm
+NO ./textures/gravel.xpm
+SO ./textures/redpattern.xpm
+WE ./textures/hierba.xpm
+EA ./textures/yelltexpattern.xpm
 
 F 220,100,0
 C 225,30,0
 
 1111111111
-1000000001
-1110N11101
+1N00000001
+1010000101
 1000000001
 1111111111

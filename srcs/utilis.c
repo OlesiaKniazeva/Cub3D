@@ -1,16 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utilis.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:13:39 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 13:57:59 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-void error_exit(char *str, int num) {
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
+void	error_exit(char *str, int num)
+{
 	printf("Error:\n     %s", str);
 	exit(num);
 }
 
-void print_double_array(t_map *m)
+void	print_double_array(t_map *m)
 {
-	char **map;
+	char	**map;
 
 	map = m->map;
-
 	while (*map)
 	{
 		printf("%s\n", *map);
@@ -31,5 +48,5 @@ char	*ft_spaces_str(int width, int len)
 		i++;
 	}
 	str[i] = '\0';
-	return str;
+	return (str);
 }

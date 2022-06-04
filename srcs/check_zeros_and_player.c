@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_zeros_and_player.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:25:38 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 13:27:20 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	check_if_map_has_player(t_all *all)
@@ -15,17 +27,16 @@ void	check_zeros_at_corners(t_all *all, int i, int j)
 
 int	check_if_symbol_is_zero_or_player(t_all *all, char **map, int i, int j)
 {
-	return ((i >= 0 && i < all->m->height) &&
-		(j >= 0 && j < all->m->width) &&
-		(map[i][j] == '0' || map[i][j] == 'N'
+	return ((i >= 0 && i < all->m->height) && (j >= 0 && j < all->m->width)
+		&& (map[i][j] == '0' || map[i][j] == 'N'
 		|| map[i][j] == 'E' || map[i][j] == 'W'
 		|| map[i][j] == 'S'));
 }
 
 int	check_if_symbol_is_zero(t_all *all, char **map, int i, int j)
 {
-	return ((i >= 0 && i < all->m->height) &&
-		(j >= 0 && j < all->m->width) && map[i][j] == '0');
+	return ((i >= 0 && i < all->m->height)
+		&& (j >= 0 && j < all->m->width) && map[i][j] == '0');
 }
 
 void	check_one_player(t_all *all, char **map, int i, int j)
@@ -42,13 +53,13 @@ void	check_one_player(t_all *all, char **map, int i, int j)
 		all->checker->s++;
 	else
 		error_exit("Something wrong with player", 16);
-	if (all->checker->n + all->checker->e + all->checker->s +
-		all->checker->w > 1)
+	if (all->checker->n + all->checker->e + all->checker->s
+		+ all->checker->w > 1)
 		error_exit("Something wrong with player", 16);
-	if (!check_if_symbol_is_zero(all, map, i, j - 1) &&
-		!check_if_symbol_is_zero(all, map, i, j + 1) &&
-		!check_if_symbol_is_zero(all, map, i + 1, j) &&
-		!check_if_symbol_is_zero(all, map, i - 1, j))
+	if (!check_if_symbol_is_zero(all, map, i, j - 1)
+		&& !check_if_symbol_is_zero(all, map, i, j + 1)
+		&& !check_if_symbol_is_zero(all, map, i + 1, j)
+		&& !check_if_symbol_is_zero(all, map, i - 1, j))
 		error_exit("Player surrounded by walls. Wrong map", 19);
 	add_player_to_struct(all, i, j, map[i][j]);
 }

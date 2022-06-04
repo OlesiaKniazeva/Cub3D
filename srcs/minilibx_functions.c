@@ -1,94 +1,101 @@
-#include "cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minilibx_functions.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:55:28 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 15:07:01 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	create_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
+#include "cub3D.h"
 
 void	my_mlx_pixel_put(t_win *win, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = win->addr + (y * win->l_len + x * (win->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *) dst = color;
 }
 
-void	move_player_right_left(t_all *all, int key_code, double moveSpeed)
+void	move_player_right_left(t_all *all, int key_code, double move_speed)
 {
 	if (key_code == A_LEFT)
 	{
-		if ((all->m->map[(int)all->player->posY][(int)(all->player->posX - \
-					all->plane->planeX * moveSpeed)] == '0'))
-			all->player->posX -= all->plane->planeX * moveSpeed;
-		if (all->m->map[(int)(all->player->posY - all->plane->planeY * \
-					moveSpeed)][(int)all->player->posX] == '0')
-			all->player->posY -= all->plane->planeY * moveSpeed;
+		if ((all->m->map[(int)all->player->pos_y][(int)(all->player->pos_x - \
+					all->plane->plane_x * move_speed)] == '0'))
+			all->player->pos_x -= all->plane->plane_x * move_speed;
+		if (all->m->map[(int)(all->player->pos_y - all->plane->plane_x * \
+					move_speed)][(int)all->player->pos_x] == '0')
+			all->player->pos_y -= all->plane->plane_x * move_speed;
 	}
 	if (key_code == D_RIGHT)
 	{
-		if ((all->m->map[(int)all->player->posY][(int)(all->player->posX + \
-					all->plane->planeX * moveSpeed)] == '0'))
-			all->player->posX += all->plane->planeX * moveSpeed;
-		if (all->m->map[(int)(all->player->posY + all->plane->planeY * \
-					moveSpeed)][(int)all->player->posX] == '0')
-			all->player->posY += all->plane->planeY * moveSpeed;
+		if ((all->m->map[(int)all->player->pos_y][(int)(all->player->pos_x + \
+					all->plane->plane_x * move_speed)] == '0'))
+			all->player->pos_x += all->plane->plane_x * move_speed;
+		if (all->m->map[(int)(all->player->pos_y + all->plane->plane_x * \
+					move_speed)][(int)all->player->pos_x] == '0')
+			all->player->pos_y += all->plane->plane_x * move_speed;
 	}
 }
 
-void	move_player_up_down(t_all *all, int key_code, double moveSpeed)
+void	move_player_up_down(t_all *all, int key_code, double move_speed)
 {
-	if (key_code == W_UP)
+	if (key_code == W_UP || key_code == UP)
 	{
-		if (all->m->map[(int)all->player->posY][(int)(all->player->posX + \
-					all->player->dirX * moveSpeed)] == '0')
-			all->player->posX += all->player->dirX * moveSpeed;
-		if (all->m->map[(int)(all->player->posY + all->player->dirY * \
-					moveSpeed)][(int)all->player->posX] == '0')
-			all->player->posY += all->player->dirY * moveSpeed;
+		if (all->m->map[(int)all->player->pos_y][(int)(all->player->pos_x + \
+					all->player->dir_x * move_speed)] == '0')
+			all->player->pos_x += all->player->dir_x * move_speed;
+		if (all->m->map[(int)(all->player->pos_y + all->player->dir_y * \
+					move_speed)][(int)all->player->pos_x] == '0')
+			all->player->pos_y += all->player->dir_y * move_speed;
 	}
-	if (key_code == S_DOWN) {
-		if (all->m->map[(int)all->player->posY][(int)(all->player->posX - \
-				all->player->dirX * moveSpeed)] == '0')
-			all->player->posX -= all->player->dirX * moveSpeed;
-		if (all->m->map[(int)(all->player->posY - all->player->dirY * \
-				moveSpeed)][(int)all->player->posX] == '0')
-			all->player->posY -= all->player->dirY * moveSpeed;
+	if (key_code == S_DOWN || key_code == DOWN)
+	{
+		if (all->m->map[(int)all->player->pos_y][(int)(all->player->pos_x - \
+				all->player->dir_x * move_speed)] == '0')
+			all->player->pos_x -= all->player->dir_x * move_speed;
+		if (all->m->map[(int)(all->player->pos_y - all->player->dir_y * \
+				move_speed)][(int)all->player->pos_x] == '0')
+			all->player->pos_y -= all->player->dir_y * move_speed;
 	}
 }
 
-void	rotate_player_view(t_all *all, double rotSpeed)
+void	rotate_player_view(t_all *all, double rot_speed)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	oldDirX = all->player->dirX;
-	all->player->dirX = all->player->dirX * cos(rotSpeed) -
-			all->player->dirY * sin(rotSpeed);
-	all->player->dirY = oldDirX * sin(rotSpeed) +
-			all->player->dirY * cos(rotSpeed);
-	oldPlaneX = all->plane->planeX;
-	all->plane->planeX = all->plane->planeX * cos(rotSpeed) -
-			all->plane->planeY * sin(rotSpeed);
-	all->plane->planeY = oldPlaneX * sin(rotSpeed) +
-			all->plane->planeY * cos(rotSpeed);
+	old_dir_x = all->player->dir_x;
+	all->player->dir_x = all->player->dir_x * cos(rot_speed)
+		- all->player->dir_y * sin(rot_speed);
+	all->player->dir_y = old_dir_x * sin(rot_speed)
+		+ all->player->dir_y * cos(rot_speed);
+	old_plane_x = all->plane->plane_x;
+	all->plane->plane_x = all->plane->plane_x * cos(rot_speed)
+		- all->plane->plane_y * sin(rot_speed);
+	all->plane->plane_y = old_plane_x * sin(rot_speed)
+		+ all->plane->plane_y * cos(rot_speed);
 }
 
 int	key_hook(int key_code, t_all *all)
 {
-	// printf("%d\n", key_code);
 	if (key_code == ESC)
-	{
-		free_memory(all);
-		exit(0);
-	}
-	if (key_code == W_UP || key_code == S_DOWN)
-		move_player_up_down(all, key_code, all->player->moveSpeed);
+		close_win(all);
+	if (key_code == W_UP || key_code == S_DOWN
+		|| key_code == UP || key_code == DOWN)
+		move_player_up_down(all, key_code, all->player->move_speed);
 	if (key_code == A_LEFT || key_code == D_RIGHT)
-		move_player_right_left(all, key_code, all->player->moveSpeed);
+		move_player_right_left(all, key_code, all->player->move_speed);
 	if (key_code == RIGHT)
-		rotate_player_view(all, -all->player->rotSpeed);
+		rotate_player_view(all, -all->player->rot_speed);
 	if (key_code == LEFT)
-		rotate_player_view(all, all->player->rotSpeed);
+		rotate_player_view(all, all->player->rot_speed);
 	print_raycaster(all);
-	return 0;
+	print_map(all);
+	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 3, 3);
+	return (0);
 }

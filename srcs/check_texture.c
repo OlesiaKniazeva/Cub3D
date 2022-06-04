@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:23:01 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 13:24:15 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	check_path_to_texture(char *str)
 {
-	int len;
-	int fd;
+	int	len;
+	int	fd;
 
 	len = ft_strlen(str);
 	if (ft_strncmp(".xpm", str + len - 4, 5))
@@ -43,15 +55,15 @@ void	add_path_to_texture(char **args, t_check *ch, t_data *data)
 
 void	add_texture_to_struct(t_data *data, t_check *ch)
 {
-	char **args;
+	char	**args;
 
 	args = ft_split(ch->trimmed, ' ');
 	free(ch->trimmed);
 	ch->trimmed = NULL;
 	if (args[2] || !args[0] || !args[1])
 		error_exit("Wrong amount of args in texture parsing", 3);
-	if (!ft_strncmp("NO", args[0], 3) || !ft_strncmp("SO", args[0], 3) ||
-			!ft_strncmp("WE", args[0], 3) || !ft_strncmp("EA", args[0], 3))
+	if (!ft_strncmp("NO", args[0], 3) || !ft_strncmp("SO", args[0], 3)
+		|| !ft_strncmp("WE", args[0], 3) || !ft_strncmp("EA", args[0], 3))
 		add_path_to_texture(args, ch, data);
 	else if (!ft_strncmp("F", args[0], 2) || !ft_strncmp("C", args[0], 2))
 		add_color_of_floor_and_ceiling(args, ch, data);

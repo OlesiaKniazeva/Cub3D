@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_floor_and_ceiling_checker.c                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:28:22 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 13:29:58 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 // if error - ft_atoi_color returns -1
@@ -5,30 +17,30 @@
 
 int	ft_atoi_color(const char *str)
 {
-	int num;
+	int	num;
 
 	num = 0;
 	if (!*str || (*str < '1' && *str > '9'))
-		return -1;
+		return (-1);
 	if (*str == '0')
 	{
 		if (str[1] && str[1] >= '0' && str[1] <= '9')
-			return -1;
-		return 0;
+			return (-1);
+		return (0);
 	}
 	while (*str && *str >= '0' && *str <= '9')
 	{
 		num = num * 10 + *str - '0';
 		str++;
 		if (num > 255)
-			return -1;
+			return (-1);
 	}
-	return num;
+	return (num);
 }
 
 char	*add_color_to_struct(char *str, t_color *col, int index)
 {
-	int num;
+	int	num;
 
 	if (!str)
 		error_exit("Wrong color data", 5);
@@ -46,12 +58,12 @@ char	*add_color_to_struct(char *str, t_color *col, int index)
 		while (*str && *str >= '0' && *str <= '9')
 			str++;
 	}
-	return str;
+	return (str);
 }
 
 void	check_correctness_of_color(char *str, t_color *col)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 3)
@@ -60,14 +72,15 @@ void	check_correctness_of_color(char *str, t_color *col)
 		if (i < 2 && *str && *str == ',')
 			str++;
 		else if ((i < 2 && *str != ',') || (i == 2 && *str))
-			 error_exit("Wrong format of color data", 6);
+			error_exit("Wrong format of color data", 6);
 		++i;
 	}
 }
 
 void	add_color_of_floor_and_ceiling(char **args, t_check *ch, t_data *data)
 {
-	t_color col;
+	t_color	col;
+
 	check_correctness_of_color(args[1], &col);
 	if (!ft_strncmp("F", args[0], 2) && !ch->floor)
 	{
@@ -83,7 +96,6 @@ void	add_color_of_floor_and_ceiling(char **args, t_check *ch, t_data *data)
 		data->ceiling[2] = col.b;
 		ch->ceiling++;
 	}
-
 	else
 		error_exit("Identifiers repetitive", 7);
 }

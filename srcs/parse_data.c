@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_data.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 14:02:36 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 14:15:52 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	make_double_array_map(t_all *all, t_list *lst, int height, int width)
 {
 	t_list	*head;
 	t_map	*m;
-	int 	i;
 	char	*temp;
 
-	i = -1;
+	all->i = -1;
 	m = malloc(sizeof(t_map));
 	m->map = malloc(sizeof(char *) * (height + 1));
 	head = lst;
@@ -16,83 +27,55 @@ void	make_double_array_map(t_all *all, t_list *lst, int height, int width)
 		if ((int)ft_strlen(lst->content) < width)
 		{
 			temp = ft_spaces_str(width, ft_strlen(lst->content));
-			m->map[++i] = ft_strjoin(lst->content, temp);
+			m->map[++all->i] = ft_strjoin(lst->content, temp);
 			free(temp);
 		}
 		else
-			m->map[++i] = ft_strdup(lst->content);
+			m->map[++all->i] = ft_strdup(lst->content);
 		lst = lst->next;
 	}
-	m->map[++i] = NULL;
+	m->map[++all->i] = NULL;
 	m->height = height;
 	m->width = width;
 	all->m = m;
 	free_chained_list(head);
 }
 
-void	check_map_correctness(t_all *all)
+void	continue_parsing(t_all *all, t_list *lst)
 {
-	char		**map;
-	int			i;
-	int			j;
-
-	i = -1;
-	print_double_array(all->m);
-	map = all->m->map;
-	while (map[i] && (++i < all->m->height))
-	{
-		j = -1;
-		check_line_for_spaces(all, map, i);
-		while (map[i][++j] && j < all->m->width)
-		{
-			if (map[i][j] == ' ')
-				check_spaces(all, map, i, j);
-			else if (map[i][j] == '0')
-				check_zeros_at_corners(all, i, j);
-			else if (map[i][j] == '1')
-				;
-			else if (map[i][j] == 'N' || map[i][j] == 'S' ||
-					 map[i][j] == 'W' || map[i][j] == 'E')
-				check_one_player(all, map, i, j);
-			else
-				error_exit("Invalid symbol in map", 15);
-		}
-	}
+	make_double_array_map(all, lst, all->height, all->width);
+	init_player_checker_struct(all);
+	check_map_correctness(all);
+	check_if_map_has_player(all);
 }
 
 void	parse_map(t_check *ch, t_all *all)
 {
 	t_list	*lst;
-	int		height;
-	int		width;
-	int		temp;
 
 	lst = NULL;
 	ft_lstadd_back(&lst, ft_lstnew(ch->line));
-	width = ft_strlen(ch->line);
-	height = 1;
+	all->width = ft_strlen(ch->line);
+	all->height = 1;
 	while (get_next_line(ch->fd, &ch->line))
 	{
 		ft_lstadd_back(&lst, ft_lstnew(ch->line));
-		temp = ft_strlen(ch->line);
-		if (temp > width)
-			width = temp;
-		height++;
+		all->temp = ft_strlen(ch->line);
+		if (all->temp > all->width)
+			all->width = all->temp;
+		all->height++;
 	}
-	if (height != 1)
+	if (all->height != 1)
 	{
 		ch->trimmed = ft_strtrim(ch->line, " \t\n");
 		if (*(ch->trimmed))
 		{
 			ft_lstadd_back(&lst, ft_lstnew(ch->line));
-			height++;
+			all->height++;
 		}
 		free(ch->trimmed);
 	}
-	make_double_array_map(all, lst, height, width);
-	init_player_checker_struct(all);
-	check_map_correctness(all);
-	check_if_map_has_player(all);
+	continue_parsing(all, lst);
 }
 
 void	skip_empty_lines(t_check *ch)
@@ -124,8 +107,7 @@ void	skip_empty_lines(t_check *ch)
 		error_exit("Error with map data!", 13);
 }
 
-
-void parse_data(char **argv, t_all *all)
+void	parse_data(char **argv, t_all *all)
 {
 	t_data	*data;
 	t_check	ch;
@@ -151,7 +133,5 @@ void parse_data(char **argv, t_all *all)
 	skip_empty_lines(&ch);
 	parse_map(&ch, all);
 	all->data = data;
-	// print_double_array(all->m);
-	// printf("-------\n");
 	close(ch.fd);
 }

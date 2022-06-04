@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 13:06:17 by myael             #+#    #+#             */
+/*   Updated: 2022/06/04 13:06:34 by myael            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_all 	all;
+	t_all	all;
 	int		len;
 
 	if (argc != 2)
@@ -12,5 +24,4 @@ int main(int argc, char **argv)
 		error_exit("Wrong format of map", 9);
 	parse_data(argv, &all);
 	executing(&all);
-	free_memory(&all);
 }
