@@ -6,7 +6,7 @@
 /*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:43:44 by myael             #+#    #+#             */
-/*   Updated: 2022/06/04 14:40:43 by myael            ###   ########.fr       */
+/*   Updated: 2022/06/04 15:17:23 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	executing(t_all *all)
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
 			&all->win->l_len, &all->win->end);
 	print_raycaster(all);
-	print_map(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 3, 3);
 	mlx_hook(all->win->win, 2, (1L << 0), key_hook, all);
 	mlx_hook(all->win->win, 17, (1L << 0), close_win, all);
