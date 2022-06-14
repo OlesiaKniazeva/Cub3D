@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilis.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:13:39 by myael             #+#    #+#             */
-/*   Updated: 2022/06/04 13:57:59 by myael            ###   ########.fr       */
+/*   Updated: 2022/06/14 11:58:32 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,33 @@ char	*ft_spaces_str(int width, int len)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+void	skip_empty_lines(t_check *ch)
+{
+	ch->trimmed = ft_strtrim(ch->line, " \t\v\f\r");
+	if (ch->trimmed && *(ch->trimmed))
+	{
+		free(ch->trimmed);
+		return ;
+	}
+	if (ch->line)
+		free(ch->line);
+	if (ch->trimmed)
+		free(ch->trimmed);
+	while (get_next_line(ch->fd, &ch->line))
+	{
+		ch->trimmed = ft_strtrim(ch->line, " \t\v\f\r");
+		if (ch->trimmed && *(ch->trimmed))
+		{
+			free(ch->trimmed);
+			break ;
+		}
+		free(ch->line);
+		ch->line = NULL;
+		free(ch->trimmed);
+		ch->trimmed = NULL;
+	}
+	if (!ch->line || !*(ch->line))
+		error_exit("Error with map data!", 13);
 }

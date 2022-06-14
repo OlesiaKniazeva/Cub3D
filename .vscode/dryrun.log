@@ -1,0 +1,11 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/madinakadyrova/Desktop/Cub3D'
+mkdir -p obj
+mkdir -p obj/srcs
+cc -g -Wall -Wextra -Werror -I includes -I minilibx_opengl -I libft -c srcs/mac_moving.c -o obj/srcs/mac_moving.o
+make -C libft
+make -C minilibx_opengl
+cc -g -Wall -Wextra -Werror -I includes -I minilibx_opengl -I libft obj/cub3D.o obj/srcs/parse_data.o obj/srcs/utilis.o obj/srcs/check_data.o obj/srcs/check_texture.o obj/srcs/executing.o obj/srcs/check_zeros_and_player.o obj/srcs/free_memory.o obj/srcs/color_floor_and_ceiling_checker.o obj/srcs/init_structs.o obj/srcs/minilibx_functions.o obj/srcs/raycast.o obj/srcs/init_structs_2.o obj/srcs/work_with_textures.o obj/srcs/mac_moving.o libft/libft.a minilibx_opengl/libmlx.a -framework OpenGL -framework AppKit -o cub3D
+ 
+make: Leaving directory `/Users/madinakadyrova/Desktop/Cub3D'
+ 

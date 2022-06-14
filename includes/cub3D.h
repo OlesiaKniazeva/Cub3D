@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:25:25 by myael             #+#    #+#             */
-/*   Updated: 2022/06/04 15:15:04 by myael            ###   ########.fr       */
+/*   Updated: 2022/06/14 12:06:09 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "key_code.h"
 
 # include <stdio.h>
 # include <unistd.h>
@@ -23,8 +24,10 @@
 
 # define WIDTH 900
 # define HEIGHT 700
-
-# define ESC 		65307
+# define ROTSPEED  0.05
+# define MOVESPEED 0.11
+# define ON_KEYDOWN	2
+// # define ESC 		65307
 
 # define RED 		0x00FF0000
 # define BLUE		0x000000FF
@@ -32,20 +35,20 @@
 # define BLACK		0x00000000
 # define CYAN		0x80A6FF
 
-# define DOWN		65364
-# define UP			65362
-# define LEFT		65361
-# define RIGHT		65363
+// # define DOWN		65364
+// # define UP			65362
+// # define LEFT		65361
+// # define RIGHT		65363
 
-# define W_UP		119
-# define S_DOWN 	115
-# define A_LEFT 	97
-# define D_RIGHT	100
+// # define W_UP		119
+// # define S_DOWN 	115
+// # define A_LEFT 	97
+// # define D_RIGHT	100
 
-# define ON_KEYDOWN	2
+// # define ON_KEYDOWN	2
 
-# define ROTSPEED 0.05
-# define MOVESPEED 0.11
+// # define ROTSPEED 0.05
+// # define MOVESPEED 0.11
 
 typedef struct s_plane
 {

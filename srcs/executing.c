@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:43:44 by myael             #+#    #+#             */
-/*   Updated: 2022/06/04 15:17:23 by myael            ###   ########.fr       */
+/*   Updated: 2022/06/07 20:38:59 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ void	print_raycaster(t_all *all)
 	all->win->img = mlx_new_image(all->win->mlx, WIDTH, HEIGHT);
 	raycaster_start(all);
 }
+/*
+int	key_for_mac(int keycode, t_all *keys)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_image(keys->win->mlx, keys->win->img);
+		mlx_destroy_window(keys->win->mlx, keys->win->img);
+		free(keys->win->mlx);
+		exit(1);
+	}
+	if (keycode == 123)
+		move_player_up_down(keys, keycode, keys->player->move_speed);
+	if (keycode == 124)
+		move_player_up_down(keys, keycode, keys->player->move_speed);
+	if (keycode == 126)
+		move_player_up_down(keys, keycode, keys->player->move_speed);
+	if (keycode == 125)
+		move_player_up_down(keys, keycode, keys->player->move_speed);
+	return (0);
+}*/
 
 void	executing(t_all *all)
 {

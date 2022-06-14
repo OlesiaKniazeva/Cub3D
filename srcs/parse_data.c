@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:02:36 by myael             #+#    #+#             */
-/*   Updated: 2022/06/04 14:15:52 by myael            ###   ########.fr       */
+/*   Updated: 2022/06/14 11:58:11 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+static void	make_double_array_map_2(t_map *m, t_all *all, t_list *head)
+{
+	m->map[++all->i] = NULL;
+	m->height = all->height;
+	m->width = all->width;
+	all->m = m;
+	free_chained_list(head);
+}
 
 void	make_double_array_map(t_all *all, t_list *lst, int height, int width)
 {
@@ -32,13 +41,10 @@ void	make_double_array_map(t_all *all, t_list *lst, int height, int width)
 		}
 		else
 			m->map[++all->i] = ft_strdup(lst->content);
+		free(lst->content);
 		lst = lst->next;
 	}
-	m->map[++all->i] = NULL;
-	m->height = height;
-	m->width = width;
-	all->m = m;
-	free_chained_list(head);
+	make_double_array_map_2(m, all, head);
 }
 
 void	continue_parsing(t_all *all, t_list *lst)
@@ -76,35 +82,6 @@ void	parse_map(t_check *ch, t_all *all)
 		free(ch->trimmed);
 	}
 	continue_parsing(all, lst);
-}
-
-void	skip_empty_lines(t_check *ch)
-{
-	ch->trimmed = ft_strtrim(ch->line, " \t\v\f\r");
-	if (ch->trimmed && *(ch->trimmed))
-	{
-		free(ch->trimmed);
-		return ;
-	}
-	if (ch->line)
-		free(ch->line);
-	if (ch->trimmed)
-		free(ch->trimmed);
-	while (get_next_line(ch->fd, &ch->line))
-	{
-		ch->trimmed = ft_strtrim(ch->line, " \t\v\f\r");
-		if (ch->trimmed && *(ch->trimmed))
-		{
-			free(ch->trimmed);
-			break ;
-		}
-		free(ch->line);
-		ch->line = NULL;
-		free(ch->trimmed);
-		ch->trimmed = NULL;
-	}
-	if (!ch->line || !*(ch->line))
-		error_exit("Error with map data!", 13);
 }
 
 void	parse_data(char **argv, t_all *all)

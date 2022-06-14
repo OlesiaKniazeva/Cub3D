@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:55:28 by myael             #+#    #+#             */
-/*   Updated: 2022/06/04 18:37:24 by myael            ###   ########.fr       */
+/*   Updated: 2022/06/14 10:55:01 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	move_player_right_left(t_all *all, int key_code, double move_speed)
 	if (key_code == A_LEFT)
 	{
 		if ((all->m->map[(int)all->player->pos_y][(int)(all->player->pos_x - \
-					all->plane->plane_x * move_speed)] == '0'))
+					all->plane->plane_x * move_speed)]) == '0')
 			all->player->pos_x -= all->plane->plane_x * move_speed;
 		if (all->m->map[(int)(all->player->pos_y - all->plane->plane_y * \
 					move_speed)][(int)all->player->pos_x] == '0')
@@ -34,7 +34,7 @@ void	move_player_right_left(t_all *all, int key_code, double move_speed)
 	if (key_code == D_RIGHT)
 	{
 		if ((all->m->map[(int)all->player->pos_y][(int)(all->player->pos_x + \
-					all->plane->plane_x * move_speed)] == '0'))
+					all->plane->plane_x * move_speed)]) == '0')
 			all->player->pos_x += all->plane->plane_x * move_speed;
 		if (all->m->map[(int)(all->player->pos_y + all->plane->plane_y * \
 					move_speed)][(int)all->player->pos_x] == '0')
