@@ -6,7 +6,7 @@
 /*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:55:28 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 10:55:01 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:56:18 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	key_hook(int key_code, t_all *all)
 		rotate_player_view(all, -all->player->rot_speed);
 	if (key_code == LEFT)
 		rotate_player_view(all, all->player->rot_speed);
-	print_raycaster(all);
+	raycaster_start(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 3, 3);
 	return (0);
 }

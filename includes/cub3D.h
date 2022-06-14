@@ -6,7 +6,7 @@
 /*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:25:25 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 12:06:09 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:52:00 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,12 @@
 # define ROTSPEED  0.05
 # define MOVESPEED 0.11
 # define ON_KEYDOWN	2
-// # define ESC 		65307
 
 # define RED 		0x00FF0000
 # define BLUE		0x000000FF
 # define WHITE		0xFFFFFFFF
 # define BLACK		0x00000000
 # define CYAN		0x80A6FF
-
-// # define DOWN		65364
-// # define UP			65362
-// # define LEFT		65361
-// # define RIGHT		65363
-
-// # define W_UP		119
-// # define S_DOWN 	115
-// # define A_LEFT 	97
-// # define D_RIGHT	100
-
-// # define ON_KEYDOWN	2
-
-// # define ROTSPEED 0.05
-// # define MOVESPEED 0.11
 
 typedef struct s_plane
 {
@@ -208,7 +192,7 @@ void			add_color_of_floor_and_ceiling(char **args,
 // executing.c //
 
 void			executing(t_all *all);
-void			print_raycaster(t_all *all);
+// void			print_raycaster(t_all *all);
 void			print_raycasted_map(int x, t_all *all);
 void			draw_floor_and_ceiling(t_all *all, int x);
 

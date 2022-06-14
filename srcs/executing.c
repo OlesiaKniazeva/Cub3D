@@ -6,7 +6,7 @@
 /*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:43:44 by myael             #+#    #+#             */
-/*   Updated: 2022/06/07 20:38:59 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:48:16 by mgregoro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,6 @@ void	print_raycasted_map(int x, t_all *all)
 	draw_floor_and_ceiling(all, x);
 }
 
-void	print_raycaster(t_all *all)
-{
-	mlx_destroy_image(all->win->mlx, all->win->img);
-	all->win->img = mlx_new_image(all->win->mlx, WIDTH, HEIGHT);
-	raycaster_start(all);
-}
-/*
-int	key_for_mac(int keycode, t_all *keys)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_image(keys->win->mlx, keys->win->img);
-		mlx_destroy_window(keys->win->mlx, keys->win->img);
-		free(keys->win->mlx);
-		exit(1);
-	}
-	if (keycode == 123)
-		move_player_up_down(keys, keycode, keys->player->move_speed);
-	if (keycode == 124)
-		move_player_up_down(keys, keycode, keys->player->move_speed);
-	if (keycode == 126)
-		move_player_up_down(keys, keycode, keys->player->move_speed);
-	if (keycode == 125)
-		move_player_up_down(keys, keycode, keys->player->move_speed);
-	return (0);
-}*/
-
 void	executing(t_all *all)
 {
 	all->win = malloc(sizeof(t_win));
@@ -87,9 +60,10 @@ void	executing(t_all *all)
 	all->win->img = mlx_new_image(all->win->mlx, WIDTH, HEIGHT);
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
 			&all->win->l_len, &all->win->end);
-	print_raycaster(all);
+	raycaster_start(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 3, 3);
-	mlx_hook(all->win->win, 2, (1L << 0), key_hook, all);
-	mlx_hook(all->win->win, 17, (1L << 0), close_win, all);
+	mlx_do_key_autorepeaton(all->win->mlx);
+	mlx_hook(all->win->win, 2, 0x1, key_hook, all);
+	mlx_hook(all->win->win, 33, (1L << 17), close_win, all);
 	mlx_loop(all->win->mlx);
 }
