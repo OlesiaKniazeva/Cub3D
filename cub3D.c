@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:06:17 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 11:09:24 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:01:34 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		error_exit("Wrong amount of arguments", 1);
 	len = ft_strlen(argv[1]);
 	if (len < 5 || ft_strncmp(".cub", argv[1] + len - 4, 5))
-		error_exit("Wrong format of map", 9);
+		error_exit("Wrong format of map", 2);
 	parse_data(argv, &all);
 	executing(&all);
 }

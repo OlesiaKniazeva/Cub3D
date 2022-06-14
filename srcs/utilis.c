@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilis.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:13:39 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 11:58:32 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:05:21 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	skip_empty_lines(t_check *ch)
 		ch->trimmed = NULL;
 	}
 	if (!ch->line || !*(ch->line))
-		error_exit("Error with map data!", 13);
+		error_exit("Error with map data!", 6);
 }

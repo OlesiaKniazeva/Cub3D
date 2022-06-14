@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_floor_and_ceiling_checker.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:28:22 by myael             #+#    #+#             */
-/*   Updated: 2022/06/07 14:31:39 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:03:58 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*add_color_to_struct(char *str, t_color *col, int index)
 	int	num;
 
 	if (!str)
-		error_exit("Wrong color data", 5);
+		error_exit("Wrong color data", 17);
 	num = ft_atoi_color(str);
 	if (num == -1)
-		error_exit("RGB data of color is wrong", 6);
+		error_exit("RGB data of color is wrong", 18);
 	else
 	{
 		if (index == 0)
@@ -72,7 +72,7 @@ void	check_correctness_of_color(char *str, t_color *col)
 		if (i < 2 && *str && *str == ',')
 			str++;
 		else if ((i < 2 && *str != ',') || (i == 2 && *str))
-			error_exit("Wrong format of color data", 6);
+			error_exit("Wrong format of color data", 19);
 		++i;
 	}
 }
@@ -97,5 +97,5 @@ void	add_color_of_floor_and_ceiling(char **args, t_check *ch, t_data *data)
 		ch->ceiling++;
 	}
 	else
-		error_exit("Identifiers repetitive", 7);
+		error_exit("Identifiers repetitive", 20);
 }

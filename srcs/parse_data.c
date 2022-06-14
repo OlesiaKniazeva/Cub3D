@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:02:36 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 11:58:11 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:04:28 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ void	parse_data(char **argv, t_all *all)
 	init_check_struct(&ch);
 	data = malloc(sizeof(t_data));
 	if (!data)
-		error_exit("Malloc error", 12);
+		error_exit("Malloc error", 21);
 	ch.fd = open(argv[1], O_RDONLY);
 	if (ch.fd == -1)
-		error_exit("Couldn't open the file", 2);
+		error_exit("Couldn't open the file", 22);
 	while (get_next_line(ch.fd, &ch.line) && ch.amount < 6)
 	{
 		ch.trimmed = ft_strtrim(ch.line, " \t\v\f\r");
@@ -106,7 +106,7 @@ void	parse_data(char **argv, t_all *all)
 			free(ch.trimmed);
 	}
 	if (ch.amount < 6)
-		error_exit("Not enough data", 10);
+		error_exit("Not enough data", 23);
 	skip_empty_lines(&ch);
 	parse_map(&ch, all);
 	all->data = data;
