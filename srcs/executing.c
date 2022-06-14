@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:43:44 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 15:48:16 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:33:49 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	executing(t_all *all)
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
 			&all->win->l_len, &all->win->end);
 	raycaster_start(all);
-	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 3, 3);
+	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	mlx_do_key_autorepeaton(all->win->mlx);
 	mlx_hook(all->win->win, 2, 0x1, key_hook, all);
 	mlx_hook(all->win->win, 33, (1L << 17), close_win, all);

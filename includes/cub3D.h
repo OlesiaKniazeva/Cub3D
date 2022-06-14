@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgregoro <mgregoro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: myael <myael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:25:25 by myael             #+#    #+#             */
-/*   Updated: 2022/06/14 15:52:00 by mgregoro         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:35:41 by myael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,6 @@ void			add_color_of_floor_and_ceiling(char **args,
 // executing.c //
 
 void			executing(t_all *all);
-// void			print_raycaster(t_all *all);
 void			print_raycasted_map(int x, t_all *all);
 void			draw_floor_and_ceiling(t_all *all, int x);
 
